@@ -1,16 +1,8 @@
+import { useState } from "react";
 import { HiCheck, HiX } from "react-icons/hi";
-
-const products = [
-  {
-    id: 1,
-    img: "/Avocado Hass.jpg",
-    name: "Chicken Breast Fillets, Boneless matuuma Marinated 6 Ounce Raw Invivid",
-    brand: "Hormel Black Labelmany",
-    price: "60.67",
-    quantity: "15",
-    status: 6,
-  },
-];
+import Modal from "./Modal";
+import { useDispatch, useSelector } from "react-redux";
+import { setCurrentProduct, updateProduct } from "../redux/productsSlice";
 
 const status = {
   0: "",
@@ -33,6 +25,17 @@ const colors = {
 };
 
 export default function Table() {
+  const [open, setOpen] = useState(false);
+  const products = useSelector((state) => state.products.products);
+  const dispatch = useDispatch();
+  const handleApprove = (id) => {
+    dispatch(updateProduct({ id, status: 1 }));
+  };
+
+  const handleMissing = (id, name) => {
+    setOpen(true);
+    dispatch(setCurrentProduct({ id, name }));
+  };
   return (
     <div className="my-8 shadow overflow-hidden border border-gray-400 sm:rounded-lg">
       <table className="min-w-full divide-y divide-gray-400 table-fixed">
@@ -83,20 +86,34 @@ export default function Table() {
                 </div>
               </td>
               <td className="px-3 py-4 flex items-center my-auto">
-                <button>
-                  <HiCheck className="w-8 h-8 mr-5 scale-90 text-green-800" />
+                <button onClick={() => handleApprove(product.id)}>
+                  <HiCheck
+                    className={`w-8 h-8 mr-5 scale-90 ${
+                      product.status == 1 ? "text-green-800" : ""
+                    }`}
+                  />
                 </button>
-                <button>
-                  <HiX className="w-8 h-8 mr-5 scale-90 text-red-800" />
+                <button onClick={() => handleMissing(product.id, product.name)}>
+                  <HiX
+                    className={`w-8 h-8 mr-5 scale-90 ${
+                      product.status == 2 || product.status == 3
+                        ? "text-red-800"
+                        : ""
+                    }`}
+                  />
                 </button>
-                <a href="#" className="text-indigo-600 hover:text-indigo-900">
+                <button
+                  onClick={() => setOpen(true)}
+                  className="text-indigo-600 hover:text-indigo-900"
+                >
                   Edit
-                </a>
+                </button>
               </td>
             </tr>
           ))}
         </tbody>
       </table>
+      <Modal open={open} setOpen={setOpen} />
     </div>
   );
 }
