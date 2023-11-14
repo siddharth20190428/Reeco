@@ -3,26 +3,7 @@ import { HiCheck, HiX } from "react-icons/hi";
 import Modal from "./Modal";
 import { useDispatch, useSelector } from "react-redux";
 import { setCurrentProduct, updateProduct } from "../redux/productsSlice";
-
-const status = {
-  0: "",
-  1: "Approved",
-  2: "Missing",
-  3: "Missing Urgent",
-  4: "Price Updated",
-  5: "Quantity Updated",
-  6: "Price and Quantity Updated",
-};
-
-const colors = {
-  0: "",
-  1: "bg-green-700",
-  2: "bg-orange-700",
-  3: "bg-red-700",
-  4: "bg-green-700",
-  5: "bg-green-700",
-  6: "bg-green-700",
-};
+import { colors, status } from "../utils";
 
 export default function Table() {
   const [open, setOpen] = useState(false);
@@ -78,7 +59,7 @@ export default function Table() {
               </td>
               <td className="px-3 py-4 w-[16%]">
                 <div
-                  className={`border p-3 rounded-3xl ${
+                  className={`border p-3 rounded-3xl w-fit ${
                     colors[product.status]
                   } text-white`}
                 >

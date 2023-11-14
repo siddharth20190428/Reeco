@@ -1,18 +1,9 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { products } from "../utils";
 
 const initialState = {
   currentProduct: null,
-  products: [
-    {
-      id: 1,
-      img: "/Avocado Hass.jpg",
-      name: "Chicken Breast Fillets, Boneless matuuma Marinated 6 Ounce Raw Invivid",
-      brand: "Hormel Black Labelmany",
-      price: "60.67",
-      quantity: "15",
-      status: 6,
-    },
-  ],
+  products,
 };
 
 const productsSlice = createSlice({
