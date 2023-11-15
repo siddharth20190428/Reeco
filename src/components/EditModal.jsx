@@ -9,7 +9,9 @@ export default function EditModal({ open, setOpen }) {
 
   const [formData, setFormData] = useState({});
 
-  let total = (currentProduct.price * currentProduct.quantity).toFixed(2);
+  let total = currentProduct
+    ? (currentProduct.price * currentProduct.quantity).toFixed(2)
+    : 0;
   if (formData.price && formData.quantity)
     total = (formData.price * formData.quantity).toFixed(2);
   else if (formData.price)
@@ -68,7 +70,10 @@ export default function EditModal({ open, setOpen }) {
                     {currentProduct ? currentProduct.brand : ""}
                   </Dialog.Description>
                   <div className="flex my-6">
-                    <img src={currentProduct.img} className="w-20 h-20 mx-4" />
+                    <img
+                      src={currentProduct ? currentProduct.img : ""}
+                      className="w-20 h-20 mx-4"
+                    />
                     <div className="flex justify-around w-full">
                       <div className="flex flex-col gap-2">
                         <label htmlFor="price">Price ($)</label>
@@ -79,15 +84,21 @@ export default function EditModal({ open, setOpen }) {
                         <input
                           type="number"
                           id="price"
-                          defaultValue={currentProduct.price}
+                          defaultValue={
+                            currentProduct ? currentProduct.price : ""
+                          }
                           onChange={handleChange}
+                          min={1}
                           className="w-20 focus:outline-none focus:border-b"
                         />
                         <input
                           type="number"
                           id="quantity"
-                          defaultValue={currentProduct.quantity}
+                          defaultValue={
+                            currentProduct ? currentProduct.quantity : ""
+                          }
                           onChange={handleChange}
+                          min={1}
                           className="w-20 focus:outline-none focus:border-b"
                         />
                         <span>{"$" + total}</span>
