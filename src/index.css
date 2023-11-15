@@ -12,3 +12,7 @@
 body {
   font-family: "Poppins", sans-serif;
 }
+
+input[type="number"] {
+  appearance: none;
+}

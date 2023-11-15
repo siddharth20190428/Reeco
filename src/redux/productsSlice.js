@@ -16,7 +16,7 @@ const productsSlice = createSlice({
     updateProduct: (state, action) => {
       state.products = state.products.map((product) => {
         if (product.id === action.payload.id)
-          product = { ...product, status: action.payload.status };
+          product = { ...product, ...action.payload };
         return product;
       });
     },

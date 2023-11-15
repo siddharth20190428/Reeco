@@ -1,21 +1,27 @@
 import { useState } from "react";
 import { HiCheck, HiX } from "react-icons/hi";
-import Modal from "./Modal";
 import { useDispatch, useSelector } from "react-redux";
 import { setCurrentProduct, updateProduct } from "../redux/productsSlice";
 import { colors, status } from "../utils";
+import MissingModal from "./MissingModal";
+import EditModal from "./EditModal";
 
 export default function Table() {
-  const [open, setOpen] = useState(false);
+  const [missingOpen, setMissingOpen] = useState(false);
+  const [editOpen, setEditOpen] = useState(false);
   const products = useSelector((state) => state.products.products);
   const dispatch = useDispatch();
   const handleApprove = (id) => {
     dispatch(updateProduct({ id, status: 1 }));
   };
 
-  const handleMissing = (id, name) => {
-    setOpen(true);
-    dispatch(setCurrentProduct({ id, name }));
+  const handleMissing = (prod) => {
+    setMissingOpen(true);
+    dispatch(setCurrentProduct(prod));
+  };
+  const handleEdit = (prod) => {
+    setEditOpen(true);
+    dispatch(setCurrentProduct(prod));
   };
   return (
     <div className="my-8 shadow overflow-hidden border border-gray-400 sm:rounded-lg">
@@ -55,7 +61,7 @@ export default function Table() {
               <td className="px-3 py-4 w-[8%]">{`$${product.price}`}</td>
               <td className="px-3 py-4 w-[8%]">{product.quantity}</td>
               <td className="px-3 py-4 w-[8%]">
-                {(product.price * product.quantity).toFixed(2)}
+                {"$" + (product.price * product.quantity).toFixed(2)}
               </td>
               <td className="px-3 py-4 w-[16%]">
                 <div
@@ -66,35 +72,38 @@ export default function Table() {
                   {status[product.status]}
                 </div>
               </td>
-              <td className="px-3 py-4 flex items-center my-auto">
-                <button onClick={() => handleApprove(product.id)}>
-                  <HiCheck
-                    className={`w-8 h-8 mr-5 scale-90 ${
-                      product.status == 1 ? "text-green-800" : ""
-                    }`}
-                  />
-                </button>
-                <button onClick={() => handleMissing(product.id, product.name)}>
-                  <HiX
-                    className={`w-8 h-8 mr-5 scale-90 ${
-                      product.status == 2 || product.status == 3
-                        ? "text-red-800"
-                        : ""
-                    }`}
-                  />
-                </button>
-                <button
-                  onClick={() => setOpen(true)}
-                  className="text-indigo-600 hover:text-indigo-900"
-                >
-                  Edit
-                </button>
+              <td className="px-3 py-4">
+                <div className="flex">
+                  <button onClick={() => handleApprove(product.id)}>
+                    <HiCheck
+                      className={`w-8 h-8 mr-5 scale-90 ${
+                        product.status == 1 ? "text-green-600" : ""
+                      }`}
+                    />
+                  </button>
+                  <button onClick={() => handleMissing(product)}>
+                    <HiX
+                      className={`w-8 h-8 mr-5 scale-90 ${
+                        product.status == 2 || product.status == 3
+                          ? "text-red-600"
+                          : ""
+                      }`}
+                    />
+                  </button>
+                  <button
+                    onClick={() => handleEdit(product)}
+                    className="text-indigo-600 hover:text-indigo-900"
+                  >
+                    Edit
+                  </button>
+                </div>
               </td>
             </tr>
           ))}
         </tbody>
       </table>
-      <Modal open={open} setOpen={setOpen} />
+      <MissingModal open={missingOpen} setOpen={setMissingOpen} />
+      <EditModal open={editOpen} setOpen={setEditOpen} />
     </div>
   );
 }

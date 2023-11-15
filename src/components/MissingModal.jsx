@@ -3,7 +3,7 @@ import { Dialog, Transition } from "@headlessui/react";
 import { useDispatch, useSelector } from "react-redux";
 import { updateProduct } from "../redux/productsSlice";
 
-export default function Example({ open, setOpen }) {
+export default function MissingModal({ open, setOpen }) {
   const { currentProduct } = useSelector((state) => state.products);
   const dispatch = useDispatch();
   return (
