@@ -24,8 +24,8 @@ export const products = [
     img: "/Avocado Hass.jpg",
     name: "Chicken Breast Fillets, Boneless matuuma Marinated 6 Ounce Raw Invivid",
     brand: "Hormel Black Labelmany",
-    price: "60.67",
-    quantity: "15",
+    price: 60.67,
+    quantity: 15,
     status: 6,
   },
   {
@@ -33,8 +33,8 @@ export const products = [
     img: "/Avocado Hass.jpg",
     name: "Chicken Breast Fillets, Boneless matuuma Marinated 6 Ounce Raw Invivid",
     brand: "Hormel Black Labelmany",
-    price: "60.67",
-    quantity: "1",
+    price: 60.67,
+    quantity: 1,
     status: 4,
   },
   {
@@ -42,8 +42,8 @@ export const products = [
     img: "/Avocado Hass.jpg",
     name: "Chicken Breast Fillets, Boneless matuuma Marinated 6 Ounce Raw Invivid",
     brand: "Hormel Black Labelmany",
-    price: "60.67",
-    quantity: "5",
+    price: 60.67,
+    quantity: 5,
     status: 3,
   },
   {
@@ -51,8 +51,8 @@ export const products = [
     img: "/Avocado Hass.jpg",
     name: "Chicken Breast Fillets, Boneless matuuma Marinated 6 Ounce Raw Invivid",
     brand: "Hormel Black Labelmany",
-    price: "60.67",
-    quantity: "4",
+    price: 60.67,
+    quantity: 4,
     status: 1,
   },
   {
@@ -61,7 +61,7 @@ export const products = [
     name: "Chicken Breast Fillets, Boneless matuuma Marinated 6 Ounce Raw Invivid",
     brand: "Hormel Black Labelmany",
     price: "60.67",
-    quantity: "67",
+    quantity: 67,
     status: 2,
   },
 ];

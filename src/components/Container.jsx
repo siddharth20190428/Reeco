@@ -1,8 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import Table from "./Table";
 import { HiOutlinePrinter, HiSearch } from "react-icons/hi";
+import AddModal from "./AddModal";
 
 const Container = () => {
+  const [addOpen, setAddOpen] = useState(false);
   return (
     <div className="max-w-7xl mx-auto border-2 p-8 rounded-lg">
       <div className="flex justify-between">
@@ -19,7 +21,10 @@ const Container = () => {
           </div>
         </div>
         <div className="flex">
-          <button className="py-2 px-4 border-2 rounded-3xl border-green-800 text-green-800 font-black">
+          <button
+            onClick={() => setAddOpen(true)}
+            className="py-2 px-4 border-2 rounded-3xl border-green-800 text-green-800 font-black"
+          >
             Add item
           </button>
           <button className="ml-4 text-green-800 font-bold">
@@ -27,6 +32,7 @@ const Container = () => {
           </button>
         </div>
       </div>
+      <AddModal open={addOpen} setOpen={setAddOpen} />
       <Table />
     </div>
   );

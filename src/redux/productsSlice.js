@@ -20,10 +20,16 @@ const productsSlice = createSlice({
         return product;
       });
     },
+    addProduct: (state, action) => {
+      action.payload.price = parseFloat(action.payload.price);
+      action.payload.quantity = parseInt(action.payload.quantity);
+      action.payload.id = Date.now();
+      state.products = [...state.products, action.payload];
+    },
   },
 });
 
-export const { createproducts, setCurrentProduct, updateProduct } =
+export const { createproducts, setCurrentProduct, updateProduct, addProduct } =
   productsSlice.actions;
 
 export default productsSlice.reducer;
